@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konfirmasi Dukungan</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/confirm.css">
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Q7g78xXsc5ZzWo-X"></script> 
 </head>
 <body>
