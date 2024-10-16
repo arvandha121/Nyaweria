@@ -1,0 +1,40 @@
+/* success.css */
+
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 50px 20px;
+}
+
+/* Header styling */
+h1 {
+    font-size: 2.5em;
+    color: #4CAF50; /* Green color for the success message */
+    margin-bottom: 20px;
+}
+
+/* Paragraph styling */
+p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+/* Link styling */
+a {
+    text-decoration: none;
+    color: #4CAF50; /* Green color for links */
+    font-weight: bold;
+    padding: 10px 15px;
+    border: 2px solid #4CAF50; /* Match border with link color */
+    border-radius: 5px; /* Rounded corners for the button */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+a:hover {
+    background-color: #4CAF50; /* Change background on hover */
+    color: white; /* Change text color on hover */
+}

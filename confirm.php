@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konfirmasi Dukungan</title>
     <link rel="stylesheet" href="css/confirm.css">
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Q7g78xXsc5ZzWo-X"></script> 
+    <script src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-GC-EYUs1jQRHKFst"></script> 
 </head>
 <body>
     <div class="container">
@@ -41,15 +41,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: 'name=' + name + '&email=' + email + '&amount=' + amount + '&message=' + message
+                    body: 'name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email) + '&amount=' + encodeURIComponent(amount) + '&message=' + encodeURIComponent(message)
                 })
                 .then(response => response.json())
                 .then(data => {
+                    console.log("Fetch Response:", data); // Log the full response
                     if (data.snapToken) {
                         snap.pay(data.snapToken, {
                             onSuccess: function(result) {
                                 console.log('Success:', result);
-                                window.location.href = "success";  // Redirect to success page
+                                window.location.href = "process";  // Redirect to success page
                             },
                             onPending: function(result) {
                                 console.log('Pending:', result);

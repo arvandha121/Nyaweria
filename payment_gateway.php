@@ -2,8 +2,8 @@
 require_once 'vendor/autoload.php'; // Jika menggunakan Composer
 
 // Set up Midtrans Configuration
-\Midtrans\Config::$serverKey = 'SB-Mid-server-ZXlFLwWl4lw82d9N6AFdxozy';
-\Midtrans\Config::$isProduction = false; // false untuk sandbox/test, true untuk live
+\Midtrans\Config::$serverKey = 'Mid-server-ke4_kEfnPpyuUCir970j_H2K';
+\Midtrans\Config::$isProduction = true; // false untuk sandbox/test, true untuk live
 \Midtrans\Config::$isSanitized = true;
 \Midtrans\Config::$is3ds = true; // 3D Secure payment for credit card
 
@@ -20,6 +20,9 @@ $transactionDetails = array(
     'order_id' => $orderId,
     'gross_amount' => (int) $amount, // Amount in IDR
 );
+
+// Log transaction details
+error_log("Transaction Details: " . json_encode($transactionDetails));
 
 // Prepare customer details
 $customerDetails = array(
@@ -45,12 +48,11 @@ $transaction = array(
 );
 
 try {
-    // Get Snap Payment Page URL
     $snapToken = \Midtrans\Snap::getSnapToken($transaction);
-    // Log Snap Token
     error_log("Snap Token: " . $snapToken);
     echo json_encode(array('snapToken' => $snapToken));
 } catch (Exception $e) {
     error_log('Midtrans Error: ' . $e->getMessage());
     echo json_encode(array('error' => $e->getMessage()));
 }
+
