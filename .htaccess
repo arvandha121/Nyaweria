@@ -1,0 +1,16 @@
+# Mengaktifkan mod_rewrite
+RewriteEngine On
+
+# Menghapus .php dari URL
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L,QSA]
+
+# Redirect dari index.php ke root domain
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
+RewriteRule ^ %1 [R,L]
+
+# Optional: menambahkan trailing slash secara otomatis
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*[^/])$ $1/ [L,R=301]

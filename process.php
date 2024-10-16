@@ -10,6 +10,6 @@
 <body>
     <h1>Pembayaran Anda Sukses</h1>
     <p>Terima kasih atas donasi Anda!</p>
-    <a href="index.php">Kembali ke Halaman Utama</a>
+    <a href="index">Kembali ke Halaman Utama</a>
 </body>
 </html>

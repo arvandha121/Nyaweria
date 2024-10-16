@@ -20,10 +20,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
         <h1>Konfirmasi Dukungan Anda</h1>
-        <p><strong>Nama:</strong> <?php echo $name; ?></p>
-        <p><strong>Email:</strong> <?php echo $email; ?></p>
-        <p><strong>Jumlah Nominal:</strong> Rp <?php echo number_format($amount, 0, ',', '.'); ?></p>
-        <p><strong>Pesan:</strong> <?php echo $message; ?></p>
+        <p><strong>Nama:</strong> <?php echo isset($name) ? $name : 'Tidak ada data'; ?></p>
+        <p><strong>Email:</strong> <?php echo isset($email) ? $email : 'Tidak ada data'; ?></p>
+        <p><strong>Jumlah Nominal:</strong> Rp <?php echo isset($amount) ? number_format($amount, 0, ',', '.') : '0'; ?></p>
+        <p><strong>Pesan:</strong> <?php echo isset($message) ? $message : 'Tidak ada pesan'; ?></p>
+
 
         <button id="pay-button">Bayar Sekarang</button>
 
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 var amount = '<?php echo $amount; ?>';
                 var message = '<?php echo $message; ?>';
 
-                fetch('payment_gateway.php', {
+                fetch('payment_gateway', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -48,11 +49,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         snap.pay(data.snapToken, {
                             onSuccess: function(result) {
                                 console.log('Success:', result);
-                                window.location.href = "success.php";  // Redirect to success page
+                                window.location.href = "success";  // Redirect to success page
                             },
                             onPending: function(result) {
                                 console.log('Pending:', result);
-                                window.location.href = "pending.php";  // Redirect to pending page
+                                window.location.href = "pending";  // Redirect to pending page
                             },
                             onError: function(result) {
                                 console.log('Error:', result);
@@ -71,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </script>
 
         <center>
-            <a href="index.php">Ubah Data</a>
+            <a href="index">Ubah Data</a>
         </center>
     </div>
 </body>

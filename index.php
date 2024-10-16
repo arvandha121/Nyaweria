@@ -25,7 +25,7 @@
         <img src="img/unnamed.jpg" alt="Lingkaran" class="responsive-image">
         
         <h1><i class="fas fa-hand-holding-heart"></i> Dukung Arvandha</h1>
-        <form action="confirm.php" method="POST">
+        <form action="confirm" method="POST">
             <div class="form-container">
                 <div class="form-column">
                     <div class="form-group">

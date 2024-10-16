@@ -11,7 +11,7 @@
     <div class="container">
         <h1>Pembayaran Pending</h1>
         <p>Pembayaran Anda belum selesai. Silakan selesaikan pembayaran Anda.</p>
-        <a href="index.php">Kembali ke Halaman Utama</a>
+        <a href="index">Kembali ke Halaman Utama</a>
     </div>
 </body>
 </html>
