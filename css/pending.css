@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5; /* Latar belakang abu-abu yang lembut */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white; /* Latar belakang putih */
+    padding: 40px;
+    border-radius: 12px; /* Sudut yang lebih membulat */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+    text-align: center;
+    width: 90%; /* Responsif */
+    max-width: 400px; /* Batas lebar maksimum */
+}
+
+h1 {
+    font-size: 28px; /* Ukuran font besar */
+    color: #ff6b6b; /* Warna merah untuk perhatian */
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px; /* Ukuran font paragraf */
+    color: #333;
+    margin-bottom: 30px; /* Jarak antara paragraf dan tombol */
+}
+
+a {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #007bff; /* Warna biru untuk tombol */
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px; /* Tombol membulat */
+    transition: background-color 0.3s ease; /* Efek hover transisi */
+}
+
+a:hover {
+    background-color: #0056b3; /* Warna saat di-hover */
+}
