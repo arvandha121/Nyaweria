@@ -1,0 +1,286 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0F191E;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+.required {
+    color: red;
+    font-weight: bold;
+}
+
+.container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    max-width: 650px;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.card-headers {
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.social-media-icons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.social-icon {
+    font-size: 21px; /* Larger size for better visibility */
+    color: #333333; /* Default icon color */
+    text-decoration: none; /* Removes any underline */
+    transition: transform 0.2s ease, color 0.2s ease; /* Smooth transition for scaling and color change */
+}
+
+.social-icon:hover {
+    transform: scale(1.1); /* Slight scaling on hover for a subtle effect */
+}
+
+/* Specific colors on hover */
+.social-icon.youtube:hover {
+    color: #FF0000; /* YouTube red */
+}
+
+.social-icon.instagram:hover {
+    color: #C13584; /* Instagram gradient base color */
+}
+
+.social-icon.twitter:hover {
+    color: #1DA1F2; /* Twitter blue */
+}
+
+.thank-you-message {
+    text-align: center;
+    color: #555;
+    margin-bottom: 25px;
+    font-size: 16px; /* Adjusted font size for more compact text */
+    max-width: 80%; /* Constrains the width for better control over line breaks */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contents {
+    padding: 25px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-column {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.form-column:last-child {
+    margin-right: 0;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0;
+    border: 2px solid #28a745;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+textarea {
+    height: 205px;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #0F191E;
+    outline: none;
+}
+
+button {
+    padding: 12px;
+    margin-top: 12px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0F191E;
+}
+
+.donation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    flex-wrap: wrap;
+}
+
+.donation-buttons button {
+    flex: 1;
+    padding: 10px;
+    margin: 5px;
+    background-color: #218838;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.donation-buttons button:hover,
+.donation-buttons button.active {
+    background-color: #0F191E;
+    color: hsl(0, 0%, 100%);
+}
+
+.donation-buttons button.active {
+    cursor: not-allowed;
+}
+
+.responsive-image {
+    width: 30%;
+    height: auto;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.suggestion-box {
+    background-color: #f8f9fa;
+    border: 2px solid #28a745;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-box h3 {
+    color: #333;
+    font-weight: bold;
+}
+
+.suggestion-box p {
+    color: #555;
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 1.4;
+    padding: 0 20px;
+}
+
+.suggestion-box a.telegram-link {
+    display: inline-block;
+    background-color: #0088cc;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-bottom: 25px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.suggestion-box a.telegram-link:hover {
+    background-color: #006f9e;
+    transform: scale(1.05);
+}
+
+.animated-check {
+    animation: scale-up 0.5s ease-in-out;
+    font-size: 20px;
+    justify-content: center;
+}
+
+@keyframes scale-up {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 600px) {
+    .form-container {
+        flex-direction: column;
+    }
+
+    .form-column {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+
+    .donation-buttons button {
+        font-size: 14px;
+        padding: 8px;
+        flex: 1 1 45%;
+    }
+
+    .card-headers {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: flex-start;
+        padding: 15px;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+
+    .logo-title {
+        font-size: 18px;
+    }
+}

@@ -10,6 +10,17 @@ body {
     padding: 50px 20px;
 }
 
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.circle-logo {
+    width: 150px; /* Adjust the size as needed */
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover; /* Ensure the image fits within the circle */
+}
+
 /* Header styling */
 h1 {
     font-size: 2.5em;

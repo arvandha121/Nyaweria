@@ -11,6 +11,7 @@ require_once 'vendor/autoload.php'; // Jika menggunakan Composer
 $name = $_POST['name'];
 $email = $_POST['email'];
 $amount = $_POST['amount'];
+$message = $_POST['message'];
 
 // Generate transaction ID
 $orderId = uniqid('DONATION_');
@@ -36,7 +37,7 @@ $itemDetails = array(
         'id' => 'donation',
         'price' => (int) $amount,
         'quantity' => 1,
-        'name' => 'Donasi '.$name
+        'name' => 'Donasi ' . $name
     ),
 );
 
@@ -50,9 +51,23 @@ $transaction = array(
 try {
     $snapToken = \Midtrans\Snap::getSnapToken($transaction);
     error_log("Snap Token: " . $snapToken);
+    
+    // Save donation data to JSON file
+    $donationData = [
+        'name' => $name,
+        'amount' => $amount,
+        'message' => $message, // Optional message
+        'timestamp' => date('Y-m-d H:i:s')
+    ];
+
+    // Read existing donations
+    $file = 'donations.json';
+    $donations = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
+    $donations[] = $donationData; // Add new donation
+    file_put_contents($file, json_encode($donations, JSON_PRETTY_PRINT)); // Save to file
+
     echo json_encode(array('snapToken' => $snapToken));
 } catch (Exception $e) {
     error_log('Midtrans Error: ' . $e->getMessage());
     echo json_encode(array('error' => $e->getMessage()));
 }
-
