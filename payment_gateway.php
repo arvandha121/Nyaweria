@@ -2,8 +2,8 @@
 require_once 'vendor/autoload.php'; // Jika menggunakan Composer
 
 // Set up Midtrans Configuration
-\Midtrans\Config::$serverKey = 'Mid-server-ke4_kEfnPpyuUCir970j_H2K';
-\Midtrans\Config::$isProduction = true; // false untuk sandbox/test, true untuk live
+\Midtrans\Config::$serverKey = 'SB-Mid-server-ZXlFLwWl4lw82d9N6AFdxozy';
+\Midtrans\Config::$isProduction = false; // false untuk sandbox/test, true untuk live
 \Midtrans\Config::$isSanitized = true;
 \Midtrans\Config::$is3ds = true; // 3D Secure payment for credit card
 
@@ -61,7 +61,7 @@ try {
     ];
 
     // Read existing donations
-    $file = 'donations.json';
+    $file = 'payment_gateway.json';
     $donations = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
     $donations[] = $donationData; // Add new donation
     file_put_contents($file, json_encode($donations, JSON_PRETTY_PRINT)); // Save to file

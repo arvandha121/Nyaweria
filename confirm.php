@@ -1,9 +1,11 @@
 <?php
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = htmlspecialchars($_POST['name']);
-    $amount = htmlspecialchars($_POST['amount']);
-    $email = htmlspecialchars($_POST['email']);
-    $message = htmlspecialchars($_POST['message']);
+    $_SESSION['name'] = htmlspecialchars($_POST['name']);
+    $_SESSION['amount'] = htmlspecialchars($_POST['amount']);
+    $_SESSION['email'] = htmlspecialchars($_POST['email']);
+    $_SESSION['message'] = htmlspecialchars($_POST['message']);
 }
 ?>
 
@@ -15,25 +17,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konfirmasi Dukungan</title>
     <link rel="stylesheet" href="public/css/confirm.css">
-    <script src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-GC-EYUs1jQRHKFst"></script> 
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Q7g78xXsc5ZzWo-X"></script>
 </head>
 <body>
     <div class="container">
         <h1>Konfirmasi Dukungan Anda</h1>
-        <p><strong>Nama:</strong> <?php echo isset($name) ? $name : 'Tidak ada data'; ?></p>
-        <p><strong>Email:</strong> <?php echo isset($email) ? $email : 'Tidak ada data'; ?></p>
-        <p><strong>Jumlah Nominal:</strong> Rp <?php echo isset($amount) ? number_format($amount, 0, ',', '.') : '0'; ?></p>
-        <p><strong>Pesan:</strong> <?php echo isset($message) ? $message : 'Tidak ada pesan'; ?></p>
+        <p><strong>Nama:</strong> <?php echo isset($_SESSION['name']) ? $_SESSION['name'] : 'Tidak ada data'; ?></p>
+        <p><strong>Email:</strong> <?php echo isset($_SESSION['email']) ? $_SESSION['email'] : 'Tidak ada data'; ?></p>
+        <p><strong>Jumlah Nominal:</strong> Rp <?php echo isset($_SESSION['amount']) ? number_format($_SESSION['amount'], 0, ',', '.') : '0'; ?></p>
+        <p><strong>Pesan:</strong> <?php echo isset($_SESSION['message']) ? $_SESSION['message'] : 'Tidak ada pesan'; ?></p>
 
         <button id="pay-button">Bayar Sekarang</button>
 
         <script type="text/javascript">
-            // Get Snap token from PHP backend
             document.getElementById('pay-button').onclick = function(){
-                var name = '<?php echo $name; ?>';
-                var email = '<?php echo $email; ?>';
-                var amount = '<?php echo $amount; ?>';
-                var message = '<?php echo $message; ?>';
+                var name = '<?php echo $_SESSION['name']; ?>';
+                var email = '<?php echo $_SESSION['email']; ?>';
+                var amount = '<?php echo $_SESSION['amount']; ?>';
+                var message = '<?php echo $_SESSION['message']; ?>';
 
                 fetch('payment_gateway', {
                     method: 'POST',
@@ -48,26 +49,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         snap.pay(data.snapToken, {
                             onSuccess: function(result) {
                                 console.log('Success:', result);
-                                
-                                // Trigger the notification overlay by sending data to notifications.php
-                                fetch('notifications.php', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/x-www-form-urlencoded',
-                                    },
-                                    body: 'name=' + encodeURIComponent(name) + '&amount=' + encodeURIComponent(amount) + '&message=' + encodeURIComponent(message)
-                                }).then(response => response.json())
-                                .then(data => {
-                                    console.log('Overlay triggered with data:', data);
-                                }).catch(error => {
-                                    console.error('Error triggering overlay:', error);
-                                });
-
-                                window.location.href = "process.php";  // Redirect to success page
+                                window.location.href = "process?order_id=" + result.order_id;
                             },
                             onPending: function(result) {
                                 console.log('Pending:', result);
-                                window.location.href = "pending.php";  // Redirect to pending page
+                                window.location.href = "pending";
                             },
                             onError: function(result) {
                                 console.log('Error:', result);
