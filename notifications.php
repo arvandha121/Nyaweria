@@ -6,9 +6,9 @@ $file = 'donations.json';
 
 // Read the latest donation from the JSON file if it exists
 $latestDonation = [
-    'name' => '',
-    'amount' => '',
-    'message' => '',
+    'name' => 'Anonymous',
+    'amount' => '0',
+    'message' => 'No message provided',
     'order_id' => '',
 ];
 
@@ -20,9 +20,9 @@ if (file_exists($file)) {
 }
 
 // Retrieve details from the latest donation
-$name = $latestDonation['name'] ?? '';
-$amount = $latestDonation['amount'] ?? '';
-$message = $latestDonation['message'] ?? '';
+$name = $latestDonation['name'] ?? 'Anonymous';
+$amount = $latestDonation['amount'] ?? '0';
+$message = $latestDonation['message'] ?? 'No message provided';
 $order_id = $latestDonation['order_id'] ?? '';
 ?>
 
@@ -36,44 +36,69 @@ $order_id = $latestDonation['order_id'] ?? '';
     <link rel="stylesheet" href="public/css/notifications.css">
     <style>
         body {
-            background: transparent; /* For OBS overlay, make the background transparent */
+            background: transparent; /* For OBS overlay */
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px; /* Increased width */
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
         .logo-container {
-            text-align: center;
-            margin-top: 30px;
+            margin-bottom: 20px;
         }
         .circle-logo {
-            width: 100px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
+            border: 3px solid #4caf50; /* Green border */
         }
         h1 {
-            text-align: center;
-            color: #4caf50; /* Green color */
-            font-size: 36px;
+            color: #4caf50;
+            font-size: 48px; /* Larger font size for visibility */
+            margin-bottom: 20px;
         }
         p {
-            text-align: center;
-            font-size: 18px;
-            color: #555;
+            font-size: 24px; /* Larger font size */
+            line-height: 1.6;
+            color: #333;
+            margin: 15px 0;
         }
-        .details {
-            text-align: center;
+        .highlight {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        .message {
+            font-style: italic;
+            color: #666;
+            font-size: 22px;
             margin-top: 20px;
+            background: #f4f4f4;
+            border-radius: 10px;
+            padding: 15px;
         }
     </style>
 </head>
 <body>
-    <div class="logo-container">
-        <img src="public/img/logo-nyawer2-removebg-preview.png" alt="Logo Nyaweria" class="circle-logo">
-    </div>
-    <h1>Nyaweria!!!!</h1>
-    <div class="details">
-        <p><strong><?php echo htmlspecialchars($name); ?></strong> mengirim dukungan sebesar <strong>Rp <?php echo number_format($amount, 0, ',', '.'); ?></strong></p>
-        <p><strong>Pesan:</strong> "<?php echo htmlspecialchars($message); ?>"</p>
-        <p><strong>Order ID:</strong> <?php echo htmlspecialchars($order_id); ?></p>
+    <div class="container">
+        <div class="logo-container">
+            <img src="public/img/logo-nyawer2-removebg-preview.png" alt="Logo Nyaweria" class="circle-logo">
+        </div>
+        <h1>Nyaweria!!!!</h1>
+        <div class="details">
+            <p><strong class="highlight"><?php echo htmlspecialchars($name); ?></strong> mengirim dukungan sebesar <strong class="highlight">Rp <?php echo number_format($amount, 0, ',', '.'); ?></strong></p>
+            <p class="message">"<?php echo htmlspecialchars($message); ?>"</p>
+        </div>
     </div>
 </body>
 </html>
