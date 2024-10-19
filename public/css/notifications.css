@@ -1,0 +1,62 @@
+body {
+    background: transparent; /* For OBS overlay */
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.container {
+    background: #dedede;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 900px; /* Increased width */
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease;
+}
+.container.visible {
+    opacity: 1; /* Show when visible */
+}
+.logo-container {
+    margin-bottom: 20px;
+}
+.circle-logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #4caf50; /* Green border */
+    text-shadow: 1px 1px 1px #333; /* Darker shadow for outline effect */
+    -webkit-text-stroke: 1px #333; /* Fallback for browsers that support it */
+}
+h1 {
+    color: #4caf50;
+    font-size: 48px; /* Larger font size for visibility */
+    margin-bottom: 20px;
+    text-shadow: 0px 0px 0px #333; /* Darker shadow for outline effect */
+    -webkit-text-stroke: 1px #333; /* Fallback for browsers that support it */
+}
+p {
+    font-size: 35px; /* Larger font size */
+    line-height: 1.6;
+    color: #333333;
+    margin: 25px 0;
+}
+.highlight {
+    color: #4caf50;
+    font-weight: bold;
+}
+.message {
+    font-style: inherit;
+    color: #333333;
+    font-size: 30px;
+    margin-top: 20px;
+    background: #f4f4f4;
+    border-radius: 10px;
+    padding: 15px;
+    font-weight:700;
+}
