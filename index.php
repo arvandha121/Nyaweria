@@ -33,7 +33,7 @@
                 Have a good day and God bless you!
             </p>
 
-            <form action="confirm" method="POST">
+            <form action="confirm.php" method="POST">
                 <div class="form-container">
                     <div class="form-column">
                         <div class="form-group">

@@ -17,7 +17,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konfirmasi Dukungan</title>
     <link rel="stylesheet" href="public/css/confirm.css">
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Q7g78xXsc5ZzWo-X"></script>
+    <!-- Demo -->
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Q7g78xXsc5ZzWo-X"></script> 
+
+    <!-- live -->
+    <!-- <script src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-GC-EYUs1jQRHKFst"></script> -->
 </head>
 <body>
     <div class="container">
@@ -36,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 var amount = '<?php echo $_SESSION['amount']; ?>';
                 var message = '<?php echo $_SESSION['message']; ?>';
 
-                fetch('payment_gateway', {
+                fetch('payment_gateway.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -49,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         snap.pay(data.snapToken, {
                             onSuccess: function(result) {
                                 console.log('Success:', result);
-                                window.location.href = "process?order_id=" + result.order_id;
+                                window.location.href = "process.php?order_id=" + result.order_id;
                             },
                             onPending: function(result) {
                                 console.log('Pending:', result);

@@ -2,8 +2,9 @@
 session_start();
 require_once 'vendor/autoload.php';
 
-\Midtrans\Config::$serverKey = 'SB-Mid-server-ZXlFLwWl4lw82d9N6AFdxozy';
-\Midtrans\Config::$isProduction = false;
+// \Midtrans\Config::$serverKey = 'Mid-server-ke4_kEfnPpyuUCir970j_H2K'; //live
+\Midtrans\Config::$serverKey = 'SB-Mid-server-ZXlFLwWl4lw82d9N6AFdxozy'; //demo
+\Midtrans\Config::$isProduction = false; // true is live, and false is sandbox
 \Midtrans\Config::$isSanitized = true;
 \Midtrans\Config::$is3ds = true;
 
