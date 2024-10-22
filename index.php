@@ -24,7 +24,10 @@
             <img src="public/img/unnamed.jpg" alt="Lingkaran" class="responsive-image">
             <h1>
                 Arvandha
-                <i class="fas fa-check-circle animated-check" style="color: #1DA1F2;"></i>
+                <span class="icon-container">
+                    <i class="fas fa-check-circle animated-check" style="color: #1DA1F2;"></i>
+                    <span class="tooltip">Developer</br>Nyaweria</span>
+                </span>
             </h1>
             <?php include 'other/icon_link_sosmed.php'; ?>
 
@@ -33,26 +36,26 @@
                 Have a good day and God bless you!
             </p>
 
-            <form action="confirm.php" method="POST">
+            <form action="confirm" method="POST">
                 <div class="form-container">
                     <div class="form-column">
                         <div class="form-group">
                             <label for="name">Dari<span class="required"> * </span></label>
-                            <input type="text" id="name" name="name" placeholder="Tulis nama/nickname disini..." required>
+                            <input type="text" id="name" name="name" placeholder="Tulis nama/nickname disini..." value="Someguy" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email<span class="required"> * </span></label>
-                            <input type="email" id="email" name="email" placeholder="Tulis email disini..." required>
+                            <input type="email" id="email" name="email" placeholder="Tulis email disini..." value="simanj4@email.com" required>
                         </div>
                         <div class="form-group">
                             <label for="amount">Nominal (IDR)<span class="required"> * </span></label>
-                            <input type="number" id="amount" name="amount" placeholder="Jumlah dukungan (contoh: 1000)" required>
+                            <input type="number" id="amount" name="amount" placeholder="Jumlah dukungan (contoh: 1000)" value="1000" required>
                         </div>
                     </div>
                     <div class="form-column">
                         <div class="form-group">
                             <label for="message">Pesan<span class="required"> * </span></label>
-                            <textarea id="message" name="message" rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                            <textarea id="message" name="message" rows="4" placeholder="Tulis pesan Anda di sini..." required>testing 1 2 3 🙊</textarea>
                         </div>
                     </div>
                 </div>
@@ -68,7 +71,7 @@
                 <div class="terms-conditions">
                     <div>
                         <input type="checkbox" id="accept-terms" onclick="toggleSubmitButton()">
-                        <label for="accept-terms"> Saya menyetujui syarat dan ketentuan <a href="#" onclick="showTerms(event)">disini</a></label>
+                        <label for="accept-terms.php"> Saya menyetujui syarat dan ketentuan <a href="#" onclick="showTerms(event)">disini</a></label>
                     </div>
                 </div>
 

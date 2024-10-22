@@ -1,12 +1,12 @@
 <?php
-session_start();
+    session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $_SESSION['name'] = htmlspecialchars($_POST['name']);
-    $_SESSION['amount'] = htmlspecialchars($_POST['amount']);
-    $_SESSION['email'] = htmlspecialchars($_POST['email']);
-    $_SESSION['message'] = htmlspecialchars($_POST['message']);
-}
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $_SESSION['name'] = htmlspecialchars($_POST['name']);
+        $_SESSION['amount'] = htmlspecialchars($_POST['amount']);
+        $_SESSION['email'] = htmlspecialchars($_POST['email']);
+        $_SESSION['message'] = htmlspecialchars($_POST['message']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 var amount = '<?php echo $_SESSION['amount']; ?>';
                 var message = '<?php echo $_SESSION['message']; ?>';
 
-                fetch('payment_gateway.php', {
+                fetch('payment_gateway', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         snap.pay(data.snapToken, {
                             onSuccess: function(result) {
                                 console.log('Success:', result);
-                                window.location.href = "process.php?order_id=" + result.order_id;
+                                window.location.href = "process?order_id=" + result.order_id;
                             },
                             onPending: function(result) {
                                 console.log('Pending:', result);
