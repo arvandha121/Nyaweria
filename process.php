@@ -1,56 +1,46 @@
 <?php
-session_start();
-require_once 'vendor/autoload.php';
+    session_start();
+    require_once 'vendor/autoload.php';
+    require_once 'database/db.php';
+    require_once 'midtrans_config.php';
 
-require_once 'midtrans_config.php';
-
-if (!isset($_GET['order_id'])) {
-    header('Location: index');
-    exit();
-}
-
-$order_id = htmlspecialchars($_GET['order_id']);
-$paymentSuccess = false;
-
-try {
-    $status = \Midtrans\Transaction::status($order_id);
-
-    if ($status->transaction_status == 'settlement' || $status->transaction_status == 'capture') {
-        // Retrieve donation details from the session
-        $name = $_SESSION['name'] ?? 'Anonymous';
-        $amount = $_SESSION['amount'] ?? '0';
-        $email = $_SESSION['email'] ?? '';
-        $message = $_SESSION['message'] ?? 'No message provided';
-        $timestamp = date('c');
-
-        // Prepare the new donation entry
-        $newDonation = [
-            "name" => $name,
-            "email" => $email,
-            "amount" => $amount,
-            "message" => $message,
-            "timestamp" => $timestamp,
-            "order_id" => $order_id
-        ];
-
-        // Read existing donations
-        $file = 'donations.json';
-        $donations = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
-
-        // Append the new donation
-        $donations[] = $newDonation;
-
-        // Save back to the JSON file
-        file_put_contents($file, json_encode($donations, JSON_PRETTY_PRINT));
-
-        // Clear session data to prevent duplicates
-        unset($_SESSION['name'], $_SESSION['amount'], $_SESSION['email'], $_SESSION['message']);
-
-        $paymentSuccess = true;
+    if (!isset($_GET['order_id'])) {
+        header('Location: index');
+        exit();
     }
-} catch (Exception $e) {
-    $error = "Terjadi kesalahan saat memverifikasi status pembayaran: " . $e->getMessage();
-}
+
+    $order_id = htmlspecialchars($_GET['order_id']);
+    $paymentSuccess = false;
+
+    try {
+        $status = \Midtrans\Transaction::status($order_id);
+
+        if ($status->transaction_status == 'settlement' || $status->transaction_status == 'capture') {
+            // Retrieve donation details from the session
+            $name = $_SESSION['name'] ?? 'Anonymous';
+            $amount = $_SESSION['amount'] ?? '0';
+            $email = $_SESSION['email'] ?? '';
+            $message = $_SESSION['message'] ?? 'No message provided';
+
+            // Save donation to donations table
+            $db = getDbConnection();
+            $query = "INSERT INTO donations (name, email, amount, message, order_id) VALUES (:name, :email, :amount, :message, :order_id)";
+            $stmt = $db->prepare($query);
+            $stmt->execute([
+                ':name' => $name,
+                ':email' => $email,
+                ':amount' => $amount,
+                ':message' => $message,
+                ':order_id' => $order_id
+            ]);
+
+            // Clear session data to prevent duplicates
+            unset($_SESSION['name'], $_SESSION['amount'], $_SESSION['email'], $_SESSION['message']);
+            $paymentSuccess = true;
+        }
+    } catch (Exception $e) {
+        $error = "Terjadi kesalahan saat memverifikasi status pembayaran: " . $e->getMessage();
+    }
 ?>
 
 <!DOCTYPE html>
