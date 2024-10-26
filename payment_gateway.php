@@ -1,12 +1,7 @@
 <?php
 require_once 'vendor/autoload.php'; // Jika menggunakan Composer
 
-// Set up Midtrans Configuration
-// \Midtrans\Config::$serverKey = 'Mid-server-ke4_kEfnPpyuUCir970j_H2K'; //live
-\Midtrans\Config::$serverKey = 'SB-Mid-server-ZXlFLwWl4lw82d9N6AFdxozy'; //demo
-\Midtrans\Config::$isProduction = false; // true is live, and false is sandbox
-\Midtrans\Config::$isSanitized = true;
-\Midtrans\Config::$is3ds = true; // 3D Secure payment for credit card
+require_once 'midtrans_config.php';
 
 // Get post data from confirm.php
 $name = $_POST['name'];
