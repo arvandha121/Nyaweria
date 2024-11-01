@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once 'database/db.php'; // Pastikan koneksi ke database
 
-// Ambil donasi terbaru dari database
+$file = 'donations.json';
+
 $latestDonation = [
     'name' => 'Anonymous',
     'amount' => '0',
@@ -10,27 +10,17 @@ $latestDonation = [
     'order_id' => '',
 ];
 
-try {
-    $db = getDbConnection();
-    $stmt = $db->query("SELECT name, amount, message, order_id FROM donations ORDER BY timestamp DESC LIMIT 1");
-    $latestDonation = $stmt->fetch();
-
-    if (!$latestDonation) {
-        $latestDonation = [
-            'name' => 'Anonymous',
-            'amount' => '0',
-            'message' => 'No message provided',
-            'order_id' => '',
-        ];
+if (file_exists($file)) {
+    $donations = json_decode(file_get_contents($file), true);
+    if (!empty($donations)) {
+        $latestDonation = end($donations);
     }
-} catch (PDOException $e) {
-    error_log("Database error: " . $e->getMessage());
 }
 
-$name = htmlspecialchars($latestDonation['name']);
-$amount = htmlspecialchars($latestDonation['amount']);
-$message = htmlspecialchars($latestDonation['message']);
-$order_id = htmlspecialchars($latestDonation['order_id']);
+$name = $latestDonation['name'] ?? 'Anonymous';
+$amount = $latestDonation['amount'] ?? '0';
+$message = $latestDonation['message'] ?? 'No message provided';
+$order_id = $latestDonation['order_id'] ?? '';
 ?>
 
 <!DOCTYPE html>
@@ -49,8 +39,8 @@ $order_id = htmlspecialchars($latestDonation['order_id']);
         </div>
         <h1>Nyaweria!!!!</h1>
         <div class="details">
-            <p><strong class="highlight" id="donor-name"><?php echo $name; ?></strong> memberi dukungan <strong class="highlight" id="donation-amount">Rp <?php echo number_format($amount, 0, ',', '.'); ?></strong></p>
-            <p class="message" id="donation-message"><?php echo $message; ?></p>
+            <p><strong class="highlight" id="donor-name"><?php echo htmlspecialchars($name); ?></strong> memberi dukungan <strong class="highlight" id="donation-amount">Rp <?php echo number_format($amount, 0, ',', '.'); ?></strong></p>
+            <p class="message" id="donation-message"><?php echo htmlspecialchars($message); ?></p>
         </div>
     </div>
 
@@ -97,8 +87,9 @@ $order_id = htmlspecialchars($latestDonation['order_id']);
             // Function to fetch the latest donation from the server
             async function fetchLatestDonation() {
                 try {
-                    const response = await fetch('get_latest_donation.php'); // Endpoint baru untuk menarik data terbaru
-                    const latestDonation = await response.json();
+                    const response = await fetch('donations.json');
+                    const donations = await response.json();
+                    const latestDonation = donations[donations.length - 1];
 
                     // Check if the latest donation is different from the last shown donation
                     if (latestDonation.order_id !== lastShownOrderId) {

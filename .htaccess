@@ -14,8 +14,3 @@ RewriteRule ^ %1 [R,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*[^/])$ $1/ [L,R=301]
-
-<Files .env>
-    Order allow,deny
-    Deny from all
-</Files>

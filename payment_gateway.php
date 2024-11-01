@@ -1,52 +1,74 @@
 <?php
-require_once 'vendor/autoload.php';
-require_once 'database/db.php';
-require_once 'midtrans_config.php';
+require_once 'vendor/autoload.php'; // Jika menggunakan Composer
 
+// Set up Midtrans Configuration
+// \Midtrans\Config::$serverKey = 'Mid-server-ke4_kEfnPpyuUCir970j_H2K'; //live
+\Midtrans\Config::$serverKey = 'SB-Mid-server-ZXlFLwWl4lw82d9N6AFdxozy'; //demo
+\Midtrans\Config::$isProduction = false; // true is live, and false is sandbox
+\Midtrans\Config::$isSanitized = true;
+\Midtrans\Config::$is3ds = true; // 3D Secure payment for credit card
+
+// Get post data from confirm.php
 $name = $_POST['name'];
 $email = $_POST['email'];
 $amount = $_POST['amount'];
 $message = $_POST['message'];
+
+// Generate transaction ID
 $orderId = uniqid('DONATION_');
 
-// Details for Midtrans
-$transactionDetails = [
+// Prepare transaction details
+$transactionDetails = array(
     'order_id' => $orderId,
-    'gross_amount' => (int) $amount,
-];
-$customerDetails = [
+    'gross_amount' => (int) $amount, // Amount in IDR
+);
+
+// Log transaction details
+error_log("Transaction Details: " . json_encode($transactionDetails));
+
+// Prepare customer details
+$customerDetails = array(
     'first_name' => $name,
     'email' => $email,
-];
-$itemDetails = [
-    [
+);
+
+// Prepare item details (optional, could be customized)
+$itemDetails = array(
+    array(
         'id' => 'donation',
         'price' => (int) $amount,
         'quantity' => 1,
         'name' => 'Donasi ' . $name
-    ],
-];
-$transaction = [
+    ),
+);
+
+// Prepare transaction
+$transaction = array(
     'transaction_details' => $transactionDetails,
     'customer_details' => $customerDetails,
     'item_details' => $itemDetails,
-];
+);
 
 try {
     $snapToken = \Midtrans\Snap::getSnapToken($transaction);
+    error_log("Snap Token: " . $snapToken);
+    
+    // Save donation data to JSON file
+    $donationData = [
+        'name' => $name,
+        'amount' => $amount,
+        'message' => $message, // Optional message
+        'timestamp' => date('Y-m-d H:i:s')
+    ];
 
-    // Save transaction details to payments table
-    $db = getDbConnection();
-    $query = "INSERT INTO payments (snap_token, amount, status) VALUES (:snap_token, :amount, :status)";
-    $stmt = $db->prepare($query);
-    $stmt->execute([
-        ':snap_token' => $snapToken,
-        ':amount' => $amount,
-        ':status' => 'pending'
-    ]);
+    // Read existing donations
+    $file = 'payment_gateway.json';
+    $donations = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
+    $donations[] = $donationData; // Add new donation
+    file_put_contents($file, json_encode($donations, JSON_PRETTY_PRINT)); // Save to file
 
-    echo json_encode(['snapToken' => $snapToken]);
+    echo json_encode(array('snapToken' => $snapToken));
 } catch (Exception $e) {
     error_log('Midtrans Error: ' . $e->getMessage());
-    echo json_encode(['error' => $e->getMessage()]);
+    echo json_encode(array('error' => $e->getMessage()));
 }

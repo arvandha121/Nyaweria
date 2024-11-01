@@ -174,17 +174,6 @@ textarea:focus {
     outline: none;
 }
 
-.notification {
-    font-size: 0.9em;
-    color: #d9534f;
-    background-color: #f8d7da;
-    border: 1px solid #f5c2c7;
-    padding: 8px;
-    border-radius: 5px;
-    margin-top: 5px;
-    display: none;
-}
-
 button {
     padding: 12px;
     margin-top: 12px;

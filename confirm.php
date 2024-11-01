@@ -1,6 +1,5 @@
 <?php
     session_start();
-    require_once 'midtrans_config.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['name'] = htmlspecialchars($_POST['name']);
@@ -19,7 +18,10 @@
     <title>Konfirmasi Dukungan</title>
     <link rel="stylesheet" href="public/css/confirm.css">
     <!-- Demo -->
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<?php echo $_ENV['MIDTRANS_CLIENT_KEY']; ?>"></script>
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Q7g78xXsc5ZzWo-X"></script> 
+
+    <!-- live -->
+    <!-- <script src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-GC-EYUs1jQRHKFst"></script> -->
 </head>
 <body>
     <div class="container">

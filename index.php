@@ -12,27 +12,9 @@
     <script>
         function setDonationAmount(amount, button) {
             document.getElementById('amount').value = amount;
-            updateNotification();
             const buttons = document.querySelectorAll('.donation-buttons button');
             buttons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-        }
-
-        function updateNotification() {
-            const amount = document.getElementById('amount').value;
-            const notification = document.getElementById('amount-notification');
-            if (amount < 1000 && amount !== "") {
-                notification.textContent = 'Nominal minimum adalah 1.000 IDR.';
-                notification.style.display = 'block';
-            } else {
-                notification.style.display = 'none';
-            }
-        }
-
-        function toggleSubmitButton() {
-            const checkbox = document.getElementById('accept-terms');
-            const submitButton = document.getElementById('submit-button');
-            submitButton.disabled = !checkbox.checked;
         }
     </script>
 </head>
@@ -44,7 +26,7 @@
                 Arvandha
                 <span class="icon-container">
                     <i class="fas fa-check-circle animated-check" style="color: #1DA1F2;"></i>
-                    <span class="tooltip">Developer<br>Nyaweria</span>
+                    <span class="tooltip">Developer</br>Nyaweria</span>
                 </span>
             </h1>
             <?php include 'other/icon_link_sosmed.php'; ?>
@@ -54,27 +36,26 @@
                 Have a good day and God bless you!
             </p>
 
-            <form action="confirm" method="POST" onsubmit="return validateForm()">
+            <form action="confirm" method="POST">
                 <div class="form-container">
                     <div class="form-column">
                         <div class="form-group">
                             <label for="name">Dari<span class="required"> * </span></label>
-                            <input type="text" id="name" name="name" placeholder="Tulis nama/nickname disini..." required>
+                            <input type="text" id="name" name="name" placeholder="Tulis nama/nickname disini..." value="Someguy" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email<span class="required"> * </span></label>
-                            <input type="email" id="email" name="email" placeholder="Tulis email disini..." required>
+                            <input type="email" id="email" name="email" placeholder="Tulis email disini..." value="simanj4@email.com" required>
                         </div>
                         <div class="form-group">
                             <label for="amount">Nominal (IDR)<span class="required"> * </span></label>
-                            <input type="number" id="amount" name="amount" placeholder="Jumlah dukungan (contoh: 1000)" oninput="updateNotification()" required>
-                            <p id="amount-notification" class="notification"></p>
+                            <input type="number" id="amount" name="amount" placeholder="Jumlah dukungan (contoh: 1000)" value="1000" required>
                         </div>
                     </div>
                     <div class="form-column">
                         <div class="form-group">
                             <label for="message">Pesan<span class="required"> * </span></label>
-                            <textarea id="message" name="message" rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                            <textarea id="message" name="message" rows="4" placeholder="Tulis pesan Anda di sini..." required>testing 1 2 3 🙊</textarea>
                         </div>
                     </div>
                 </div>
@@ -86,15 +67,16 @@
                     <button type="button" onclick="setDonationAmount(25000, this)">25.000</button>
                 </div>
 
+                <!-- Link to terms and checkbox for agreement -->
                 <div class="terms-conditions">
                     <div>
                         <input type="checkbox" id="accept-terms" onclick="toggleSubmitButton()">
-                        <label for="accept-terms"> Saya menyetujui syarat dan ketentuan <a href="#" onclick="showTerms(event)">disini</a></label>
+                        <label for="accept-terms.php"> Saya menyetujui syarat dan ketentuan <a href="#" onclick="showTerms(event)">disini</a></label>
                     </div>
                 </div>
 
                 <button type="submit" id="submit-button" class="btn" disabled>Konfirmasi Dukungan</button>
-                
+                <!-- Suggestion Box -->
                 <div class="suggestion-box">
                     <h3>Kotak Saran</h3>
                     <p>Ingin menyampaikan pesan atau saran langsung? Kirimkan melalui Telegram dan siarkan pesan Anda dengan mengunjungi</p>
@@ -106,6 +88,7 @@
         </div>
     </div>
 
+    <!-- Include Popup for Terms and Conditions -->
     <?php include 'other/popup_terms.php'; ?>
 
     <script src="public/js/scriptpopupcondition.js"></script>

@@ -1,0 +1,6 @@
+{
+    "require": {
+        "midtrans/midtrans-php": "^2.6",
+        "cboden/ratchet": "^0.4.4"
+    }
+}
