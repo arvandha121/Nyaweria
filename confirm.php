@@ -1,12 +1,19 @@
 <?php
-    session_start();
+session_start();
+require_once 'vendor/autoload.php';
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $_SESSION['name'] = htmlspecialchars($_POST['name']);
-        $_SESSION['amount'] = htmlspecialchars($_POST['amount']);
-        $_SESSION['email'] = htmlspecialchars($_POST['email']);
-        $_SESSION['message'] = htmlspecialchars($_POST['message']);
-    }
+// Load environment variables
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$clientKey = getenv('MIDTRANS_CLIENT_KEY');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $_SESSION['name'] = htmlspecialchars($_POST['name']);
+    $_SESSION['amount'] = htmlspecialchars($_POST['amount']);
+    $_SESSION['email'] = htmlspecialchars($_POST['email']);
+    $_SESSION['message'] = htmlspecialchars($_POST['message']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,11 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konfirmasi Dukungan</title>
     <link rel="stylesheet" href="public/css/confirm.css">
-    <!-- Demo -->
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Q7g78xXsc5ZzWo-X"></script> 
-
-    <!-- live -->
-    <!-- <script src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-GC-EYUs1jQRHKFst"></script> -->
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<?php echo htmlspecialchars($clientKey); ?>"></script> 
 </head>
 <body>
     <div class="container">
