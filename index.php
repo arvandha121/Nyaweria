@@ -1,3 +1,4 @@
+<!-- index.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +10,7 @@
     <link rel="stylesheet" href="public/css/popup_condition.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script>
-        function setDonationAmount(amount, button) {
-            document.getElementById('amount').value = amount;
-            const buttons = document.querySelectorAll('.donation-buttons button');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-        }
-    </script>
+    <script src="public/js/script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -36,7 +30,7 @@
                 Have a good day and God bless you!
             </p>
 
-            <form action="confirm" method="POST">
+            <form action="confirm.php" method="POST">
                 <div class="form-container">
                     <div class="form-column">
                         <div class="form-group">
@@ -49,7 +43,11 @@
                         </div>
                         <div class="form-group">
                             <label for="amount">Nominal (IDR)<span class="required"> * </span></label>
-                            <input type="number" id="amount" name="amount" placeholder="Jumlah dukungan (contoh: 1000)" required>
+                            <input type="number" id="amount" name="amount" placeholder="Jumlah dukungan (contoh: 1000)" required oninput="validateAmount()">
+                            <!-- Notifikasi error dengan ikon -->
+                            <p id="error-message" class="error-message" style="display: none;">
+                                Jumlah dukungan minimal adalah Rp 1.000.
+                            </p>
                         </div>
                     </div>
                     <div class="form-column">
