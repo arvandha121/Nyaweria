@@ -41,21 +41,21 @@
                     <div class="form-column">
                         <div class="form-group">
                             <label for="name">Dari<span class="required"> * </span></label>
-                            <input type="text" id="name" name="name" placeholder="Tulis nama/nickname disini..." value="Someguy" required>
+                            <input type="text" id="name" name="name" placeholder="Tulis nama/nickname disini..." required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email<span class="required"> * </span></label>
-                            <input type="email" id="email" name="email" placeholder="Tulis email disini..." value="simanj4@email.com" required>
+                            <input type="email" id="email" name="email" placeholder="Tulis email disini..." required>
                         </div>
                         <div class="form-group">
                             <label for="amount">Nominal (IDR)<span class="required"> * </span></label>
-                            <input type="number" id="amount" name="amount" placeholder="Jumlah dukungan (contoh: 1000)" value="1000" required>
+                            <input type="number" id="amount" name="amount" placeholder="Jumlah dukungan (contoh: 1000)" required>
                         </div>
                     </div>
                     <div class="form-column">
                         <div class="form-group">
                             <label for="message">Pesan<span class="required"> * </span></label>
-                            <textarea id="message" name="message" rows="4" placeholder="Tulis pesan Anda di sini..." required>testing 1 2 3 🙊</textarea>
+                            <textarea id="message" name="message" rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea>
                         </div>
                     </div>
                 </div>

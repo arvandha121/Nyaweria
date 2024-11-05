@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konfirmasi Dukungan</title>
     <link rel="stylesheet" href="public/css/confirm.css">
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<?php echo htmlspecialchars($clientKey); ?>"></script> 
+    <script src="https://app.midtrans.com/snap/snap.js" data-client-key="<?php echo htmlspecialchars($clientKey); ?>"></script>
 </head>
 <body>
     <div class="container">

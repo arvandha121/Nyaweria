@@ -8,7 +8,7 @@ $dotenv->load();
 
 // \Midtrans\Config::$serverKey = getenv('MIDTRANS_SERVER_KEY');
 \Midtrans\Config::$serverKey = $_ENV['MIDTRANS_SERVER_KEY'];
-\Midtrans\Config::$isProduction = filter_var(getenv('MIDTRANS_IS_PRODUCTION'), FILTER_VALIDATE_BOOLEAN);
+\Midtrans\Config::$isProduction = filter_var($_ENV['MIDTRANS_IS_PRODUCTION'], FILTER_VALIDATE_BOOLEAN);
 \Midtrans\Config::$isSanitized = filter_var(getenv('MIDTRANS_IS_SANITIZED'), FILTER_VALIDATE_BOOLEAN);
 \Midtrans\Config::$is3ds = filter_var(getenv('MIDTRANS_IS_3DS'), FILTER_VALIDATE_BOOLEAN);
 
