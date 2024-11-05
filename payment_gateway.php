@@ -1,12 +1,15 @@
 <?php
 require_once 'vendor/autoload.php'; // Jika menggunakan Composer
 
-// Set up Midtrans Configuration
-// \Midtrans\Config::$serverKey = 'Mid-server-ke4_kEfnPpyuUCir970j_H2K'; //live
-\Midtrans\Config::$serverKey = 'SB-Mid-server-ZXlFLwWl4lw82d9N6AFdxozy'; //demo
-\Midtrans\Config::$isProduction = false; // true is live, and false is sandbox
-\Midtrans\Config::$isSanitized = true;
-\Midtrans\Config::$is3ds = true; // 3D Secure payment for credit card
+// Muat environment
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+\Midtrans\Config::$serverKey = $_ENV['MIDTRANS_SERVER_KEY'];
+// \Midtrans\Config::$serverKey = 'SB-Mid-server-0mnmC-0JhSgVifPkap9eF3_R';
+\Midtrans\Config::$isProduction = filter_var(getenv('MIDTRANS_IS_PRODUCTION'), FILTER_VALIDATE_BOOLEAN);
+\Midtrans\Config::$isSanitized = filter_var(getenv('MIDTRANS_IS_SANITIZED'), FILTER_VALIDATE_BOOLEAN);
+\Midtrans\Config::$is3ds = filter_var(getenv('MIDTRANS_IS_3DS'), FILTER_VALIDATE_BOOLEAN);
 
 // Get post data from confirm.php
 $name = $_POST['name'];

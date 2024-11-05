@@ -6,7 +6,7 @@ require_once 'vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-$clientKey = getenv('MIDTRANS_CLIENT_KEY');
+$clientKey = $_ENV['MIDTRANS_CLIENT_KEY'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['name'] = htmlspecialchars($_POST['name']);
