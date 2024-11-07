@@ -1,3 +1,5 @@
+<h1 style="text-align: center;">BARIS CODE YANG TERTERA HANYA DIPAKAI UNTUK HAL PRIBADI</h1>
+<h1 style="text-align: center;">DAN , TIDAK UNTUK DI PERJUAL BELIKAN</h1>
 ## Getting Started
 
 Clone atau download baris code diatas lalu ketik :
